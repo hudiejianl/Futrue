@@ -35,6 +35,7 @@
   - `template`
   - `openai`
   - `deepseek`
+- validated `deepseek-v4-flash` end-to-end with a real API call
 
 ### Inference and Demo
 
@@ -85,7 +86,7 @@
 ### LLM / Knowledge Layer
 
 - [ ] expand the knowledge base with more cases and strategies
-- [ ] validate `deepseek-v4-flash` with a real API key
+- [x] validate `deepseek-v4-flash` with a real API key
 - [ ] compare `template` vs `deepseek` explanation quality
 
 ### Demo / System Polish

@@ -4,9 +4,11 @@ from pathlib import Path
 import gradio as gr
 
 from src.engine.force_inference_service import ForceInferenceService
+from src.utils.env_loader import load_env_file
 
 
 ROOT = Path(r"D:\my\Future\toolwear_multimodal")
+load_env_file(ROOT / ".env")
 
 SERVICE = ForceInferenceService(
     split_file=str(ROOT / "data" / "processed" / "splits" / "val.csv"),

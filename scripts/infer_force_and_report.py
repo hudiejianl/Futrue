@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 from src.engine.force_inference_service import ForceInferenceService
+from src.utils.env_loader import load_env_file
 
 
 def parse_args():
@@ -36,7 +37,7 @@ def parse_args():
         "--report-mode",
         type=str,
         default="template",
-        choices=["template", "openai"],
+        choices=["template", "openai", "deepseek"],
     )
     parser.add_argument(
         "--prompt-template",
@@ -54,6 +55,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+    load_env_file(Path(r"D:\my\Future\toolwear_multimodal\.env"))
     service = ForceInferenceService(
         split_file=str(args.split_file),
         train_split_file=str(args.train_split_file),

@@ -34,7 +34,13 @@ def build_structured_result(summary: dict, knowledge_items: list[dict]) -> dict:
             actions.append(action)
 
     if not evidence:
-        evidence.append({"title": "无命中证据", "reason": "当前没有匹配到规则证据。", "risk_level": "info"})
+        evidence.append(
+            {
+                "title": "无命中证据",
+                "reason": "当前没有匹配到规则证据。",
+                "risk_level": "info",
+            }
+        )
 
     if not actions:
         actions.append("暂无明确建议，请结合人工经验进一步判断。")
@@ -86,11 +92,11 @@ def generate_openai_report(summary: dict, knowledge_items: list[dict], prompt_te
         + "\n\n知识库检索结果：\n"
         + json.dumps(knowledge_items, ensure_ascii=False, indent=2)
     )
-    response = client.responses.create(
+    response = client.chat.completions.create(
         model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
-        input=content,
+        messages=[{"role": "user", "content": content}],
     )
-    return response.output_text
+    return response.choices[0].message.content or ""
 
 
 def generate_deepseek_report(summary: dict, knowledge_items: list[dict], prompt_template_path: str) -> str:
@@ -98,10 +104,7 @@ def generate_deepseek_report(summary: dict, knowledge_items: list[dict], prompt_
     if not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY not set")
 
-    try:
-        from openai import OpenAI
-    except Exception as e:
-        raise RuntimeError(f"OpenAI-compatible SDK unavailable: {e!r}") from e
+    from openai import OpenAI
 
     base_url = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
     model_name = os.getenv("DEEPSEEK_MODEL", "deepseek-v4-flash")
@@ -115,11 +118,11 @@ def generate_deepseek_report(summary: dict, knowledge_items: list[dict], prompt_
         + "\n\n知识库检索结果：\n"
         + json.dumps(knowledge_items, ensure_ascii=False, indent=2)
     )
-    response = client.responses.create(
+    response = client.chat.completions.create(
         model=model_name,
-        input=content,
+        messages=[{"role": "user", "content": content}],
     )
-    return response.output_text
+    return response.choices[0].message.content or ""
 
 
 def generate_report(summary: dict, knowledge_items: list[dict], mode: str = "template", prompt_template_path: str | None = None) -> str:

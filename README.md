@@ -229,6 +229,10 @@ Current backends:
 - optional OpenAI generation
 - optional DeepSeek generation
 
+DeepSeek backend status:
+
+- `deepseek-v4-flash` has now been validated end-to-end with a real API call
+
 Example outputs:
 
 - `reports/demo_report.txt`
@@ -350,7 +354,8 @@ Confirmed problematic files:
 
 - local template mode is working
 - OpenAI and DeepSeek modes are structurally supported
-- but they still need live-key end-to-end validation
+- DeepSeek has already been validated end-to-end with a live key
+- OpenAI mode remains optional and unvalidated in this repository
 
 ## 12. Recommended Next Steps
 
