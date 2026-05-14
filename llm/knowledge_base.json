@@ -1,0 +1,50 @@
+[
+  {
+    "id": "wear_normal",
+    "condition": "wear_level=0",
+    "title": "刀具处于正常磨损阶段",
+    "advice": "当前刀具状态稳定，可继续加工，并保持常规监测频率。"
+  },
+  {
+    "id": "wear_slight",
+    "condition": "wear_level=1",
+    "title": "刀具进入轻度磨损阶段",
+    "advice": "建议提高磨损监测频率，关注后续磨损增长趋势。"
+  },
+  {
+    "id": "wear_moderate",
+    "condition": "wear_level=2",
+    "title": "刀具进入中度磨损阶段",
+    "advice": "建议结合加工质量要求评估是否换刀，并适当降低加工负载。"
+  },
+  {
+    "id": "wear_severe",
+    "condition": "wear_level=3",
+    "title": "刀具进入重度磨损阶段",
+    "advice": "建议尽快换刀，避免继续加工导致质量恶化或刀具失效。"
+  },
+  {
+    "id": "high_wear_value",
+    "condition": "wear_value>0.30",
+    "title": "磨损值较高",
+    "advice": "当前磨损值已处于较高水平，应优先考虑换刀或降低切削负载。"
+  },
+  {
+    "id": "mid_wear_value",
+    "condition": "wear_value>0.20",
+    "title": "磨损值持续上升",
+    "advice": "建议继续观察磨损变化，并准备后续刀具维护方案。"
+  },
+  {
+    "id": "force_regression_reference",
+    "condition": "force_only_model",
+    "title": "主预测模型为力信号模型",
+    "advice": "当前系统以力/扭矩信号模型作为主预测依据，因为其在实验中表现最稳定。"
+  },
+  {
+    "id": "image_auxiliary_reference",
+    "condition": "image_auxiliary",
+    "title": "图像模态用于辅助解释",
+    "advice": "图像模态当前主要用于辅助判断刀具表面磨损形态和支持解释输出。"
+  }
+]

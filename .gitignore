@@ -1,0 +1,16 @@
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.venv/
+venv/
+
+outputs/
+*.onnx
+
+.gradio/
+
+Thumbs.db
+Desktop.ini

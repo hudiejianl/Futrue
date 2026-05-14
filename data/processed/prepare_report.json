@@ -1,0 +1,14 @@
+{
+  "dataset_root": "D:\\my\\Future\\QIT-CEMC Dataset",
+  "force_files": 68,
+  "vibration_files": 67,
+  "image_dirs": 69,
+  "side_label_rows": 272,
+  "end_label_rows": 272,
+  "side_samples_all": 272,
+  "side_samples_complete": 267,
+  "missing_vibration_cycles": [
+    2
+  ],
+  "incomplete_image_samples": 1
+}

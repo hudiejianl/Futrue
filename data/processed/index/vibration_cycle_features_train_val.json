@@ -1,0 +1,42 @@
+{
+  "num_cycles": 53,
+  "feature_columns": [
+    "vib_x_mean",
+    "vib_x_std",
+    "vib_x_min",
+    "vib_x_max",
+    "vib_x_abs_mean",
+    "vib_y_mean",
+    "vib_y_std",
+    "vib_y_min",
+    "vib_y_max",
+    "vib_y_abs_mean",
+    "vib_z_mean",
+    "vib_z_std",
+    "vib_z_min",
+    "vib_z_max",
+    "vib_z_abs_mean",
+    "sound_mean",
+    "sound_std",
+    "sound_min",
+    "sound_max",
+    "sound_abs_mean"
+  ],
+  "failed_files": [
+    {
+      "cycle_id": 21,
+      "vib_file": "D:\\my\\Future\\QIT-CEMC Dataset\\Vibration and sound data\\02-01-01.xlsx",
+      "error": "ParseError('no element found: line 1, column 379348084')"
+    },
+    {
+      "cycle_id": 39,
+      "vib_file": "D:\\my\\Future\\QIT-CEMC Dataset\\Vibration and sound data\\02-16-01.csv",
+      "error": "ParserError('Error tokenizing data. C error: Expected 5 fields in line 760273, saw 7\\n')"
+    },
+    {
+      "cycle_id": 54,
+      "vib_file": "D:\\my\\Future\\QIT-CEMC Dataset\\Vibration and sound data\\02-20-02.xlsx",
+      "error": "ParseError('no element found: line 1, column 34033556')"
+    }
+  ]
+}
