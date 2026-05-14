@@ -269,6 +269,11 @@ Current demo shows:
 - generated diagnosis report
 - ONNX benchmark information
 
+Recommended presentation mode:
+
+- `deepseek` for final showcase
+- `template` as deterministic fallback
+
 ## 10. How to Run
 
 ### 10.1 Data preprocessing

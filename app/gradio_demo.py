@@ -36,7 +36,13 @@ def build_demo():
     samples = SERVICE.list_samples()
     with gr.Blocks(title="Tool Wear Monitoring System") as demo:
         gr.Markdown("# Tool Wear Monitoring System")
-        gr.Markdown("Force-only prediction backbone + multimodal auxiliary context + explanation module + ONNX deployment.")
+        gr.Markdown(
+            "Force-only prediction backbone + multimodal auxiliary context + explanation module + ONNX deployment."
+        )
+        gr.Markdown(
+            "Recommended demo mode: `deepseek`. "
+            "Use `template` as a deterministic fallback when external API output is not needed."
+        )
 
         with gr.Row():
             sample_id = gr.Dropdown(
@@ -62,6 +68,13 @@ def build_demo():
         with gr.Row():
             knowledge_output = gr.Textbox(label="Knowledge Items", lines=14)
             benchmark_output = gr.Textbox(label="Deployment Benchmark", lines=14)
+
+        gr.Markdown(
+            "Explanation panels: `Prediction Summary` shows model output, "
+            "`Rule Hits` shows matched deterministic rules, "
+            "`Knowledge Items` shows retrieved evidence, and "
+            "`Diagnostic Report` shows the final rendered explanation."
+        )
 
         run_btn.click(
             fn=run_inference,

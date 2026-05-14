@@ -97,6 +97,11 @@
 - [ ] improve evidence display and report readability
 - [ ] add a cleaner export or save option if needed
 
+已完成的近期增强：
+
+- demo 已明确推荐 `deepseek` 作为展示模式
+- system workflow 文档已补充流程图和架构图
+
 ### Model-side refinement
 
 - [ ] decide whether to invest more in pretrained image features

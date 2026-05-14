@@ -24,6 +24,23 @@ Raw Dataset
   -> Demo / Deployment Output
 ```
 
+## 2.1 Workflow Diagram
+
+```mermaid
+flowchart TD
+    A["Raw QIT-CEMC Dataset"] --> B["Data Cleaning and Indexing"]
+    B --> C["Feature Extraction"]
+    C --> D["Primary Force-only Model"]
+    D --> E["Structured Prediction Summary"]
+    E --> F["Rule Engine"]
+    F --> G["Knowledge Retrieval"]
+    G --> H["Report Generation"]
+    H --> I["Demo Output"]
+    D --> J["ONNX Export"]
+    J --> K["ONNX Runtime Benchmark"]
+    K --> I
+```
+
 ## 3. Data Layer
 
 Inputs:
@@ -131,3 +148,20 @@ The most defensible final system interpretation is:
 - the ONNX path validates deployment feasibility
 
 This makes the project a practical end-to-end prototype rather than only a collection of model experiments.
+
+## 9. System Architecture Diagram
+
+```mermaid
+flowchart LR
+    S1["Force / Torque Signals"] --> M["Primary Prediction Backbone"]
+    S2["Vibration / Sound Signals"] --> AUX["Auxiliary Multimodal Context"]
+    S3["Tool Images"] --> AUX
+    M --> SUM["Prediction Summary"]
+    AUX --> SUM
+    SUM --> R["Rule Engine"]
+    R --> KB["Knowledge Base / Retrieval"]
+    KB --> REP["Report Generator"]
+    REP --> DEMO["Gradio Demo"]
+    M --> DEP["ONNX Deployment"]
+    DEP --> DEMO
+```
