@@ -233,6 +233,7 @@ DeepSeek backend status:
 
 - `deepseek-v4-flash` has now been validated end-to-end with a real API call
 - it is currently the recommended showcase mode for demos, while `template` remains the safer fallback mode
+- prompt iteration has already reduced verbosity and improved structural consistency
 
 Example outputs:
 

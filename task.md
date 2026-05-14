@@ -89,7 +89,7 @@
 - [ ] expand the knowledge base with more cases and strategies
 - [x] validate `deepseek-v4-flash` with a real API key
 - [x] compare `template` vs `deepseek` explanation quality
-- [ ] optimize the prompt to reduce verbosity and unsupported details
+- [x] optimize the prompt to reduce verbosity and unsupported details
 
 ### Demo / System Polish
 
