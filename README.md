@@ -115,6 +115,7 @@ The explanation module is implemented in:
 - `llm/rule_engine.py`
 - `llm/retriever.py`
 - `llm/report_generator.py`
+- `llm/prompt_template.txt`
 
 The current explanation layer supports two backends:
 
@@ -128,6 +129,10 @@ Prompt template:
 Inference entry:
 
 - `scripts/infer_force_and_report.py`
+
+Reusable service layer:
+
+- `src/engine/force_inference_service.py`
 
 ### 4.5 Deployment
 
@@ -267,6 +272,15 @@ python deploy/benchmark_force_onnx.py
 ```bash
 python app/gradio_demo.py
 ```
+
+The current demo shows:
+
+- selected sample image
+- structured prediction summary
+- matched rules
+- retrieved knowledge items
+- generated diagnostic report
+- ONNX benchmark result
 
 ## 10. Current Limitations
 

@@ -1,51 +1,74 @@
 import json
-import subprocess
 from pathlib import Path
 
 import gradio as gr
-import pandas as pd
+
+from src.engine.force_inference_service import ForceInferenceService
 
 
 ROOT = Path(r"D:\my\Future\toolwear_multimodal")
-VAL_FILE = ROOT / "data" / "processed" / "splits" / "val.csv"
-SCRIPT = ROOT / "scripts" / "infer_force_and_report.py"
-REPORT_PATH = ROOT / "reports" / "force_infer_report.txt"
+
+SERVICE = ForceInferenceService(
+    split_file=str(ROOT / "data" / "processed" / "splits" / "val.csv"),
+    train_split_file=str(ROOT / "data" / "processed" / "splits" / "train.csv"),
+    feature_file=str(ROOT / "data" / "processed" / "index" / "force_cycle_features.csv"),
+    model_path=str(ROOT / "outputs" / "force_baseline_cls" / "best_model.pt"),
+    kb_path=str(ROOT / "llm" / "knowledge_base.json"),
+    prompt_template_path=str(ROOT / "llm" / "prompt_template.txt"),
+)
+
+BENCHMARK = json.loads((ROOT / "reports" / "force_onnx_benchmark.json").read_text(encoding="utf-8"))
 
 
-def list_samples():
-    df = pd.read_csv(VAL_FILE)
-    return df["sample_id"].tolist()
-
-
-def run_inference(sample_id: str):
-    cmd = [
-        "python",
-        str(SCRIPT),
-        "--sample-id",
-        sample_id,
-        "--output",
-        str(REPORT_PATH),
-    ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        return f"推理失败：\n{result.stderr}", ""
-
-    text = REPORT_PATH.read_text(encoding="utf-8") if REPORT_PATH.exists() else ""
-    return result.stdout, text
+def run_inference(sample_id: str, report_mode: str):
+    result = SERVICE.infer(sample_id=sample_id, report_mode=report_mode)
+    summary_text = json.dumps(result["summary"], ensure_ascii=False, indent=2)
+    rule_text = json.dumps(result["rule_hits"], ensure_ascii=False, indent=2)
+    knowledge_text = json.dumps(result["knowledge_items"], ensure_ascii=False, indent=2)
+    image_path = result["summary"].get("image_file", "")
+    benchmark_text = json.dumps(BENCHMARK, ensure_ascii=False, indent=2)
+    return image_path, summary_text, rule_text, knowledge_text, result["report"], benchmark_text
 
 
 def build_demo():
-    sample_choices = list_samples()
-    with gr.Blocks(title="Tool Wear Demo") as demo:
-        gr.Markdown("# Tool Wear Monitoring Demo")
-        sample_id = gr.Dropdown(choices=sample_choices, label="选择样本", value=sample_choices[0] if sample_choices else None)
-        run_btn = gr.Button("运行推理")
-        raw_output = gr.Textbox(label="结构化输出", lines=20)
-        report_output = gr.Textbox(label="诊断报告", lines=16)
-        run_btn.click(fn=run_inference, inputs=[sample_id], outputs=[raw_output, report_output])
+    samples = SERVICE.list_samples()
+    with gr.Blocks(title="Tool Wear Monitoring System") as demo:
+        gr.Markdown("# Tool Wear Monitoring System")
+        gr.Markdown("Force-only prediction backbone + multimodal auxiliary context + explanation module + ONNX deployment.")
+
+        with gr.Row():
+            sample_id = gr.Dropdown(
+                choices=samples,
+                label="Select Sample",
+                value=samples[0] if samples else None,
+            )
+            report_mode = gr.Dropdown(
+                choices=["template", "openai"],
+                value="template",
+                label="Report Backend",
+            )
+            run_btn = gr.Button("Run Inference")
+
+        with gr.Row():
+            image_view = gr.Image(label="Tool Image", type="filepath")
+            report_output = gr.Textbox(label="Diagnostic Report", lines=18)
+
+        with gr.Row():
+            summary_output = gr.Textbox(label="Prediction Summary", lines=14)
+            rule_output = gr.Textbox(label="Rule Hits", lines=14)
+
+        with gr.Row():
+            knowledge_output = gr.Textbox(label="Knowledge Items", lines=14)
+            benchmark_output = gr.Textbox(label="Deployment Benchmark", lines=14)
+
+        run_btn.click(
+            fn=run_inference,
+            inputs=[sample_id, report_mode],
+            outputs=[image_view, summary_output, rule_output, knowledge_output, report_output, benchmark_output],
+        )
+
     return demo
 
 
 if __name__ == "__main__":
-    demo = build_demo()
-    demo.launch()
+    build_demo().launch()
