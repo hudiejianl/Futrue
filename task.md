@@ -128,6 +128,8 @@
 
 - 实验汇总文档：
   - [baseline_summary.md](D:\my\Future\toolwear_multimodal\reports\baseline_summary.md)
+- 改进计划文档：
+  - [improvement_plan.md](D:\my\Future\toolwear_multimodal\reports\improvement_plan.md)
 
 ## 当前结论
 

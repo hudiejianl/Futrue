@@ -178,6 +178,7 @@ Best validation result:
 Detailed discussion is available in:
 
 - `reports/baseline_summary.md`
+- `reports/improvement_plan.md`
 
 ## 6. Current Technical Conclusion
 
