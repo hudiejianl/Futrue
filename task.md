@@ -55,6 +55,8 @@
 - Wrote improvement plan
 - Wrote formal experiment report
 - Wrote system workflow document
+- Wrote staged project roadmap:
+  - [project_plan.md](D:\my\Future\toolwear_multimodal\project_plan.md)
 
 ## Current Main Conclusion
 

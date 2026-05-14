@@ -186,6 +186,7 @@ Detailed discussion is available in:
 - `reports/improvement_plan.md`
 - `reports/experiment_report.md`
 - `reports/system_workflow.md`
+- `project_plan.md`
 
 ## 6. Current Technical Conclusion
 
