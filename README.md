@@ -184,6 +184,8 @@ Detailed discussion is available in:
 
 - `reports/baseline_summary.md`
 - `reports/improvement_plan.md`
+- `reports/experiment_report.md`
+- `reports/system_workflow.md`
 
 ## 6. Current Technical Conclusion
 

@@ -53,6 +53,8 @@
 - Wrote repository `README.md`
 - Wrote baseline summary
 - Wrote improvement plan
+- Wrote formal experiment report
+- Wrote system workflow document
 
 ## Current Main Conclusion
 
