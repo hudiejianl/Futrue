@@ -97,6 +97,11 @@
   - [force_infer_report.txt](D:\my\Future\toolwear_multimodal\reports\force_infer_report.txt)
 - 实现最小 Gradio demo 入口：
   - [gradio_demo.py](D:\my\Future\toolwear_multimodal\app\gradio_demo.py)
+- 升级解释模块为双后端结构：
+  - 默认模板生成
+  - 可选 OpenAI API 生成
+- 增加提示模板：
+  - [prompt_template.txt](D:\my\Future\toolwear_multimodal\llm\prompt_template.txt)
 
 ### 部署链路
 
@@ -109,6 +114,15 @@
   - [benchmark_force_onnx.py](D:\my\Future\toolwear_multimodal\deploy\benchmark_force_onnx.py)
 - 生成部署基准结果：
   - [force_onnx_benchmark.json](D:\my\Future\toolwear_multimodal\reports\force_onnx_benchmark.json)
+
+### 统一训练与数据入口
+
+- 实现统一多模态数据集入口：
+  - [multimodal_dataset.py](D:\my\Future\toolwear_multimodal\src\datasets\multimodal_dataset.py)
+- 实现统一融合模型入口：
+  - [multimodal_fusion_model.py](D:\my\Future\toolwear_multimodal\src\models\multimodal_fusion_model.py)
+- 实现统一训练脚本：
+  - [train_multimodal.py](D:\my\Future\toolwear_multimodal\scripts\train_multimodal.py)
 
 ### 文档
 

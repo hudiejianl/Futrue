@@ -33,6 +33,17 @@ def parse_args():
         type=Path,
         default=Path(r"D:\my\Future\toolwear_multimodal\llm\knowledge_base.json"),
     )
+    parser.add_argument(
+        "--report-mode",
+        type=str,
+        default="template",
+        choices=["template", "openai"],
+    )
+    parser.add_argument(
+        "--prompt-template",
+        type=Path,
+        default=Path(r"D:\my\Future\toolwear_multimodal\llm\prompt_template.txt"),
+    )
     parser.add_argument("--sample-id", type=str, default="")
     parser.add_argument(
         "--output",
@@ -99,7 +110,12 @@ def main():
     rule_hits = evaluate_rules(summary)
     retriever = KnowledgeRetriever(str(args.kb_path))
     knowledge_items = retriever.retrieve(rule_hits)
-    report = generate_report(summary, knowledge_items)
+    report = generate_report(
+        summary,
+        knowledge_items,
+        mode=args.report_mode,
+        prompt_template_path=str(args.prompt_template),
+    )
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding="utf-8")

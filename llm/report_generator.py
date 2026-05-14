@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import json
+import os
+from pathlib import Path
+
 
 LEVEL_MAP = {
     0: "正常",
@@ -9,7 +13,7 @@ LEVEL_MAP = {
 }
 
 
-def generate_report(summary: dict, knowledge_items: list[dict]) -> str:
+def generate_template_report(summary: dict, knowledge_items: list[dict]) -> str:
     wear_level = int(summary.get("wear_level", -1))
     wear_value = float(summary.get("predicted_wear", 0.0))
     cycle_id = summary.get("cycle_id", "unknown")
@@ -45,3 +49,37 @@ def generate_report(summary: dict, knowledge_items: list[dict]) -> str:
         *advice_lines,
     ]
     return "\n".join(report)
+
+
+def generate_openai_report(summary: dict, knowledge_items: list[dict], prompt_template_path: str) -> str:
+    api_key = os.getenv("OPENAI_API_KEY", "")
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY not set")
+
+    try:
+        from openai import OpenAI
+    except Exception as e:
+        raise RuntimeError(f"OpenAI SDK unavailable: {e!r}") from e
+
+    template = Path(prompt_template_path).read_text(encoding="utf-8")
+    client = OpenAI(api_key=api_key)
+    content = (
+        template
+        + "\n\n结构化预测摘要：\n"
+        + json.dumps(summary, ensure_ascii=False, indent=2)
+        + "\n\n知识库检索结果：\n"
+        + json.dumps(knowledge_items, ensure_ascii=False, indent=2)
+    )
+    response = client.responses.create(
+        model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+        input=content,
+    )
+    return response.output_text
+
+
+def generate_report(summary: dict, knowledge_items: list[dict], mode: str = "template", prompt_template_path: str | None = None) -> str:
+    if mode == "openai":
+        if not prompt_template_path:
+            raise ValueError("prompt_template_path is required when mode='openai'")
+        return generate_openai_report(summary, knowledge_items, prompt_template_path)
+    return generate_template_report(summary, knowledge_items)
