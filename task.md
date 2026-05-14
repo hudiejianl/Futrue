@@ -36,6 +36,7 @@
   - `openai`
   - `deepseek`
 - validated `deepseek-v4-flash` end-to-end with a real API call
+- completed `template` vs `deepseek` report comparison
 
 ### Inference and Demo
 
@@ -87,7 +88,8 @@
 
 - [ ] expand the knowledge base with more cases and strategies
 - [x] validate `deepseek-v4-flash` with a real API key
-- [ ] compare `template` vs `deepseek` explanation quality
+- [x] compare `template` vs `deepseek` explanation quality
+- [ ] optimize the prompt to reduce verbosity and unsupported details
 
 ### Demo / System Polish
 
