@@ -4,103 +4,112 @@
 
 ### Data Preparation
 
-- Parsed and cleaned `QIT-CEMC Dataset`
-- Converted original labels into structured side/end wear tables
-- Built indexed sample files and train/val/test splits
-- Extracted force statistics
-- Extracted vibration/sound statistics and enhanced signal features
+- processed `QIT-CEMC Dataset`
+- expanded labels from raw `xls`
+- built structured sample indices
+- generated train/val/test splits
+- extracted force features
+- extracted vibration/sound features
+- added enhanced vibration statistics
 
 ### Modeling
 
-- Implemented and trained `Force-only` baseline
-- Implemented and compared:
-  - `Force + Vibration/Sound`
-  - `Force + Image`
-  - `Force + Vibration/Sound + Image`
-- Added classification-priority training mode
-- Added unified multimodal dataset and fusion model entry
+- implemented `Force-only`
+- implemented `Force + Vibration/Sound`
+- implemented `Force + Image`
+- implemented `Force + Vibration/Sound + Image`
+- added classification-priority training mode
+- added unified multimodal dataset and model entry
 
 ### Explanation Layer
 
-- Implemented knowledge base
-- Implemented rule engine
-- Implemented retriever
-- Implemented report generator
-- Added prompt template for optional OpenAI-style generation
-- Added reusable inference service layer:
-  - [force_inference_service.py](D:\my\Future\toolwear_multimodal\src\engine\force_inference_service.py)
-- Connected real `Force-only` model inference to report generation
+- implemented local knowledge base
+- implemented deterministic rule engine
+- implemented retriever
+- upgraded knowledge base structure
+- upgraded retriever to support condition filtering and simple scoring
+- implemented structured report generation
+- added prompt template
+- added reusable inference service layer
+- added support for:
+  - `template`
+  - `openai`
+  - `deepseek`
 
-### Demo
+### Inference and Demo
 
-- Built minimal Gradio demo
-- Upgraded demo to show:
+- connected real `Force-only` inference to report generation
+- built a Gradio demo
+- upgraded the demo to show:
   - sample image
-  - structured summary
+  - prediction summary
   - rule hits
   - retrieved knowledge items
   - generated report
-  - ONNX benchmark result
+  - ONNX benchmark information
 
 ### Deployment
 
-- Exported `Force-only` model to ONNX
-- Benchmarked ONNX Runtime CPU inference
-- Recorded latency and model size
+- exported `Force-only` model to ONNX
+- benchmarked ONNX Runtime CPU inference
+- recorded model size and average latency
 
 ### Documentation
 
-- Wrote repository `README.md`
-- Wrote baseline summary
-- Wrote improvement plan
-- Wrote formal experiment report
-- Wrote system workflow document
-- Wrote staged project roadmap:
-  - [project_plan.md](D:\my\Future\toolwear_multimodal\project_plan.md)
+- wrote `README.md`
+- wrote `baseline_summary.md`
+- wrote `improvement_plan.md`
+- wrote `experiment_report.md`
+- wrote `system_workflow.md`
+- wrote staged roadmap in `project_plan.md`
 
 ## Current Main Conclusion
 
-- `Force-only` is currently the best primary prediction model
-- multimodal branches are useful for comparison, analysis, and explanation support
-- the strongest final project framing is:
-  - `Force-only` for core prediction
-  - auxiliary modalities for richer system context
-  - explanation layer for maintenance recommendation
-  - ONNX deployment for edge-side validation
+- `Force-only` remains the strongest primary predictor
+- multimodal branches are useful, but currently more valuable for:
+  - comparison
+  - richer context
+  - explanation support
+- the explanation layer and deployment path are now major project strengths
 
 ## Current Limitations
 
-- multimodal models do not consistently outperform `Force-only`
-- vibration modality still contains corrupted files
-- image branch is weak because it does not use pretrained visual weights
-- explanation module supports an OpenAI-style backend structurally, but it has not been validated end-to-end with a live API call
-- demo is functional but still minimal in UI polish
+- multimodal prediction gains are still unstable
+- vibration modality has damaged files
+- image branch still lacks pretrained visual features
+- DeepSeek/OpenAI backends are structurally supported but not yet validated with a live key
+- demo is improved but still not fully polished for final presentation
 
 ## Remaining Work
 
-### System polish
+### LLM / Knowledge Layer
 
-- [ ] improve demo layout and presentation quality
-- [ ] unify configuration management more cleanly
-- [ ] optionally add one-click sample switching and export
+- [ ] expand the knowledge base with more cases and strategies
+- [ ] validate `deepseek-v4-flash` with a real API key
+- [ ] compare `template` vs `deepseek` explanation quality
 
-### Model-side improvements
+### Demo / System Polish
 
-- [ ] decide whether to invest further in vibration features
-- [ ] decide whether to add pretrained image features
-- [ ] avoid unnecessary model-branch expansion unless there is clear gain
+- [ ] polish layout and presentation quality
+- [ ] improve evidence display and report readability
+- [ ] add a cleaner export or save option if needed
 
-### Presentation material
+### Model-side refinement
 
-- [ ] generate a formal experiment comparison table
-- [ ] prepare project diagrams
-- [ ] prepare resume-ready project description
-- [ ] prepare presentation-ready workflow summary
+- [ ] decide whether to invest more in pretrained image features
+- [ ] decide whether further vibration feature engineering is worth the effort
+- [ ] avoid unnecessary model branch expansion without clear gain
+
+### Presentation Materials
+
+- [ ] generate final experiment comparison table
+- [ ] generate clean architecture / workflow figures
+- [ ] prepare concise project description for external use
 
 ## Recommended Next Priority
 
-1. polish the final demo and system presentation
-2. finalize external-facing experiment summary
-3. prepare resume and presentation material
+1. validate the DeepSeek backend end-to-end once the key is available
+2. improve the knowledge base and retrieval quality
+3. polish the demo as the final project showcase
 
-At the current stage, presentation quality and system cohesion are higher-value than adding more weak baselines.
+At the current stage, explanation quality and demo polish are the highest-value directions.

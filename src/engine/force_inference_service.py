@@ -84,7 +84,7 @@ class ForceInferenceService:
 
         summary = self._build_summary(row, wear_pred, cls_pred)
         rule_hits = evaluate_rules(summary)
-        knowledge_items = self.retriever.retrieve(rule_hits)
+        knowledge_items = self.retriever.retrieve(rule_hits, summary=summary)
         report = generate_report(
             summary,
             knowledge_items,

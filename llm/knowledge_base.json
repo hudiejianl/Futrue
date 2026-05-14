@@ -1,50 +1,99 @@
 [
   {
     "id": "wear_normal",
-    "condition": "wear_level=0",
     "title": "刀具处于正常磨损阶段",
-    "advice": "当前刀具状态稳定，可继续加工，并保持常规监测频率。"
+    "category": "wear_level",
+    "applicable_conditions": {
+      "wear_level": [0]
+    },
+    "risk_level": "low",
+    "recommended_action": "继续加工，并保持常规监测频率。",
+    "evidence_type": "label_based",
+    "case_tag": ["normal", "stable"]
   },
   {
     "id": "wear_slight",
-    "condition": "wear_level=1",
     "title": "刀具进入轻度磨损阶段",
-    "advice": "建议提高磨损监测频率，关注后续磨损增长趋势。"
+    "category": "wear_level",
+    "applicable_conditions": {
+      "wear_level": [1]
+    },
+    "risk_level": "low",
+    "recommended_action": "提高磨损监测频率，关注后续磨损增长趋势。",
+    "evidence_type": "label_based",
+    "case_tag": ["slight", "monitoring"]
   },
   {
     "id": "wear_moderate",
-    "condition": "wear_level=2",
     "title": "刀具进入中度磨损阶段",
-    "advice": "建议结合加工质量要求评估是否换刀，并适当降低加工负载。"
+    "category": "wear_level",
+    "applicable_conditions": {
+      "wear_level": [2]
+    },
+    "risk_level": "medium",
+    "recommended_action": "结合加工质量要求评估是否换刀，并适当降低加工负载。",
+    "evidence_type": "label_based",
+    "case_tag": ["moderate", "load_control"]
   },
   {
     "id": "wear_severe",
-    "condition": "wear_level=3",
     "title": "刀具进入重度磨损阶段",
-    "advice": "建议尽快换刀，避免继续加工导致质量恶化或刀具失效。"
+    "category": "wear_level",
+    "applicable_conditions": {
+      "wear_level": [3]
+    },
+    "risk_level": "high",
+    "recommended_action": "尽快换刀，避免继续加工导致质量恶化或刀具失效。",
+    "evidence_type": "label_based",
+    "case_tag": ["severe", "replace_tool"]
   },
   {
     "id": "high_wear_value",
-    "condition": "wear_value>0.30",
-    "title": "磨损值较高",
-    "advice": "当前磨损值已处于较高水平，应优先考虑换刀或降低切削负载。"
+    "title": "预测磨损值较高",
+    "category": "wear_value",
+    "applicable_conditions": {
+      "wear_value_min": 0.30
+    },
+    "risk_level": "high",
+    "recommended_action": "优先考虑换刀或降低切削负载。",
+    "evidence_type": "regression_based",
+    "case_tag": ["high_value", "warning"]
   },
   {
     "id": "mid_wear_value",
-    "condition": "wear_value>0.20",
-    "title": "磨损值持续上升",
-    "advice": "建议继续观察磨损变化，并准备后续刀具维护方案。"
+    "title": "预测磨损值处于中间区间",
+    "category": "wear_value",
+    "applicable_conditions": {
+      "wear_value_min": 0.20,
+      "wear_value_max": 0.30
+    },
+    "risk_level": "medium",
+    "recommended_action": "继续观察磨损变化，并准备后续维护方案。",
+    "evidence_type": "regression_based",
+    "case_tag": ["mid_value", "observe"]
   },
   {
     "id": "force_regression_reference",
-    "condition": "force_only_model",
     "title": "主预测模型为力信号模型",
-    "advice": "当前系统以力/扭矩信号模型作为主预测依据，因为其在实验中表现最稳定。"
+    "category": "model_reference",
+    "applicable_conditions": {
+      "primary_model": ["force_only"]
+    },
+    "risk_level": "info",
+    "recommended_action": "当前系统以力/扭矩信号模型作为主预测依据，因为其在实验中表现最稳定。",
+    "evidence_type": "system_reference",
+    "case_tag": ["force_model", "primary_model"]
   },
   {
     "id": "image_auxiliary_reference",
-    "condition": "image_auxiliary",
     "title": "图像模态用于辅助解释",
-    "advice": "图像模态当前主要用于辅助判断刀具表面磨损形态和支持解释输出。"
+    "category": "modality_reference",
+    "applicable_conditions": {
+      "use_image_context": true
+    },
+    "risk_level": "info",
+    "recommended_action": "图像模态当前主要用于辅助判断刀具表面磨损形态和支持解释输出。",
+    "evidence_type": "system_reference",
+    "case_tag": ["image", "auxiliary"]
   }
 ]

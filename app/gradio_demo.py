@@ -43,7 +43,7 @@ def build_demo():
                 value=samples[0] if samples else None,
             )
             report_mode = gr.Dropdown(
-                choices=["template", "openai"],
+                choices=["template", "deepseek", "openai"],
                 value="template",
                 label="Report Backend",
             )
