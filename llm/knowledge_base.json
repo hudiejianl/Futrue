@@ -9,7 +9,7 @@
     "risk_level": "low",
     "recommended_action": "继续加工，并保持常规监测频率。",
     "evidence_type": "label_based",
-    "case_tag": ["normal", "stable"]
+    "case_tag": ["normal", "stable", "continue"]
   },
   {
     "id": "wear_slight",
@@ -21,7 +21,7 @@
     "risk_level": "low",
     "recommended_action": "提高磨损监测频率，关注后续磨损增长趋势。",
     "evidence_type": "label_based",
-    "case_tag": ["slight", "monitoring"]
+    "case_tag": ["slight", "monitoring", "trend"]
   },
   {
     "id": "wear_moderate",
@@ -33,7 +33,7 @@
     "risk_level": "medium",
     "recommended_action": "结合加工质量要求评估是否换刀，并适当降低加工负载。",
     "evidence_type": "label_based",
-    "case_tag": ["moderate", "load_control"]
+    "case_tag": ["moderate", "load_control", "assessment"]
   },
   {
     "id": "wear_severe",
@@ -45,7 +45,7 @@
     "risk_level": "high",
     "recommended_action": "尽快换刀，避免继续加工导致质量恶化或刀具失效。",
     "evidence_type": "label_based",
-    "case_tag": ["severe", "replace_tool"]
+    "case_tag": ["severe", "replace_tool", "high_risk"]
   },
   {
     "id": "high_wear_value",
@@ -57,7 +57,7 @@
     "risk_level": "high",
     "recommended_action": "优先考虑换刀或降低切削负载。",
     "evidence_type": "regression_based",
-    "case_tag": ["high_value", "warning"]
+    "case_tag": ["high_value", "warning", "replace_or_reduce"]
   },
   {
     "id": "mid_wear_value",
@@ -70,7 +70,7 @@
     "risk_level": "medium",
     "recommended_action": "继续观察磨损变化，并准备后续维护方案。",
     "evidence_type": "regression_based",
-    "case_tag": ["mid_value", "observe"]
+    "case_tag": ["mid_value", "observe", "prepare_maintenance"]
   },
   {
     "id": "force_regression_reference",
@@ -82,7 +82,7 @@
     "risk_level": "info",
     "recommended_action": "当前系统以力/扭矩信号模型作为主预测依据，因为其在实验中表现最稳定。",
     "evidence_type": "system_reference",
-    "case_tag": ["force_model", "primary_model"]
+    "case_tag": ["force_model", "primary_model", "stable_backbone"]
   },
   {
     "id": "image_auxiliary_reference",
@@ -94,6 +94,79 @@
     "risk_level": "info",
     "recommended_action": "图像模态当前主要用于辅助判断刀具表面磨损形态和支持解释输出。",
     "evidence_type": "system_reference",
-    "case_tag": ["image", "auxiliary"]
+    "case_tag": ["image", "auxiliary", "visual_context"]
+  },
+  {
+    "id": "prediction_consistent",
+    "title": "预测结果与标签较一致",
+    "category": "prediction_trace",
+    "applicable_conditions": {
+      "prediction_error_max": 0.10
+    },
+    "risk_level": "info",
+    "recommended_action": "当前预测结果与参考标签偏差较小，可将该结论作为稳定参考。",
+    "evidence_type": "consistency_check",
+    "case_tag": ["consistent", "small_error", "stable_reference"]
+  },
+  {
+    "id": "prediction_deviation_medium",
+    "title": "预测与标签存在中等偏差",
+    "category": "prediction_trace",
+    "applicable_conditions": {
+      "prediction_error_min": 0.10,
+      "prediction_error_max": 0.25
+    },
+    "risk_level": "medium",
+    "recommended_action": "建议结合图像或人工复核结果，对当前预测进行辅助确认。",
+    "evidence_type": "consistency_check",
+    "case_tag": ["medium_error", "review", "cross_check"]
+  },
+  {
+    "id": "prediction_deviation_large",
+    "title": "预测与标签存在较大偏差",
+    "category": "prediction_trace",
+    "applicable_conditions": {
+      "prediction_error_min": 0.25
+    },
+    "risk_level": "medium",
+    "recommended_action": "建议优先进行人工复核，并检查当前样本是否存在异常工况或图像/信号偏差。",
+    "evidence_type": "consistency_check",
+    "case_tag": ["large_error", "manual_review", "sample_check"]
+  },
+  {
+    "id": "monitoring_action_low_risk",
+    "title": "低风险工况下的监测建议",
+    "category": "strategy",
+    "applicable_conditions": {
+      "wear_level": [0, 1]
+    },
+    "risk_level": "low",
+    "recommended_action": "建议保持周期性监测，重点观察磨损趋势而非立即干预。",
+    "evidence_type": "strategy",
+    "case_tag": ["low_risk", "periodic_monitoring", "trend_tracking"]
+  },
+  {
+    "id": "monitoring_action_medium_risk",
+    "title": "中风险工况下的监测建议",
+    "category": "strategy",
+    "applicable_conditions": {
+      "wear_level": [2]
+    },
+    "risk_level": "medium",
+    "recommended_action": "建议缩短监测间隔，并结合加工质量要求提前准备换刀计划。",
+    "evidence_type": "strategy",
+    "case_tag": ["medium_risk", "short_interval", "prepare_replacement"]
+  },
+  {
+    "id": "monitoring_action_high_risk",
+    "title": "高风险工况下的干预建议",
+    "category": "strategy",
+    "applicable_conditions": {
+      "wear_level": [3]
+    },
+    "risk_level": "high",
+    "recommended_action": "建议立即评估换刀必要性，并避免继续高负载加工。",
+    "evidence_type": "strategy",
+    "case_tag": ["high_risk", "intervention", "replace_or_stop"]
   }
 ]

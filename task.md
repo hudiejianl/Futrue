@@ -86,7 +86,7 @@
 
 ### LLM / Knowledge Layer
 
-- [ ] expand the knowledge base with more cases and strategies
+- [x] expand the knowledge base with more cases and strategies
 - [x] validate `deepseek-v4-flash` with a real API key
 - [x] compare `template` vs `deepseek` explanation quality
 - [x] optimize the prompt to reduce verbosity and unsupported details

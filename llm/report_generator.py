@@ -22,10 +22,11 @@ def build_structured_result(summary: dict, knowledge_items: list[dict]) -> dict:
     evidence = []
     actions = []
     for item in knowledge_items:
+        reason = item.get("reason", "") or item.get("title", "")
         evidence.append(
             {
                 "title": item.get("title", ""),
-                "reason": item.get("reason", ""),
+                "reason": reason,
                 "risk_level": item.get("risk_level", "info"),
             }
         )

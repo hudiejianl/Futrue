@@ -61,13 +61,16 @@ class ForceInferenceService:
         return torch.tensor(values.values.astype("float32")).unsqueeze(0)
 
     def _build_summary(self, row: pd.Series, wear_pred: float, cls_pred: int) -> dict:
+        gt_wear = float(row["wear_value"])
+        prediction_error = abs(wear_pred - gt_wear)
         return {
             "sample_id": row["sample_id"],
             "cycle_id": row["run_id"],
             "predicted_wear": wear_pred,
             "wear_level": cls_pred,
-            "ground_truth_wear": float(row["wear_value"]),
+            "ground_truth_wear": gt_wear,
             "ground_truth_level": int(row["wear_level"]),
+            "prediction_error": prediction_error,
             "primary_model": "force_only",
             "use_image_context": True,
             "image_file": row["image_file"],
@@ -118,6 +121,7 @@ class ForceInferenceService:
             "cycle_id": summary["cycle_id"],
             "predicted_wear": round(float(summary["predicted_wear"]), 4),
             "ground_truth_wear": round(float(summary["ground_truth_wear"]), 4),
+            "prediction_error": round(float(summary["prediction_error"]), 4),
             "predicted_level": int(summary["wear_level"]),
             "ground_truth_level": int(summary["ground_truth_level"]),
             "backend_used": summary["report_backend_used"],

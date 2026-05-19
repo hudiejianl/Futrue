@@ -33,6 +33,17 @@ class KnowledgeRetriever:
         if use_image_context is not None and bool(summary.get("use_image_context", False)) != bool(use_image_context):
             return False
 
+        prediction_error = summary.get("prediction_error")
+        error_min = conditions.get("prediction_error_min")
+        if error_min is not None:
+            if prediction_error is None or float(prediction_error) < float(error_min):
+                return False
+
+        error_max = conditions.get("prediction_error_max")
+        if error_max is not None:
+            if prediction_error is None or float(prediction_error) > float(error_max):
+                return False
+
         return True
 
     def _score_item(self, summary: dict, item: dict, rule_hits: list[dict]) -> int:
