@@ -117,6 +117,7 @@
 - [x] prepare concise project description for external use
 - [x] prepare interview script
 - [x] prepare PPT outline
+- [x] prepare final external-facing version
 
 ## Recommended Next Priority
 
