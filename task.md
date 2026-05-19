@@ -112,7 +112,9 @@
 
 - [ ] generate final experiment comparison table
 - [ ] generate clean architecture / workflow figures
-- [ ] prepare concise project description for external use
+- [x] prepare concise project description for external use
+- [x] prepare interview script
+- [x] prepare PPT outline
 
 ## Recommended Next Priority
 

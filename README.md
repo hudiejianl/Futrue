@@ -385,4 +385,10 @@ The project already has:
 - a presentation-oriented demo
 - a staged project roadmap
 
+Additional presentation materials are now available under `reports/`, including:
+
+- `resume_project_description.md`
+- `interview_script.md`
+- `ppt_outline.md`
+
 At this point, the project is already a strong prototype, and the highest-value work is now system polish and stronger explanation quality, not uncontrolled model expansion.
