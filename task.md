@@ -64,6 +64,8 @@
 - wrote `experiment_report.md`
 - wrote `system_workflow.md`
 - wrote staged roadmap in `project_plan.md`
+- wrote `final_experiment_table.md`
+- wrote `result_summary_page.md`
 
 ## Current Main Conclusion
 

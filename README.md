@@ -195,6 +195,8 @@ Detailed analysis:
 
 - `reports/baseline_summary.md`
 - `reports/experiment_report.md`
+- `reports/final_experiment_table.md`
+- `reports/result_summary_page.md`
 
 ## 6. Current Technical Conclusion
 
