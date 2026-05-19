@@ -118,6 +118,8 @@
 - [x] prepare interview script
 - [x] prepare PPT outline
 - [x] prepare final external-facing version
+- [x] prepare final resume entry
+- [x] prepare Q&A notes
 
 ## Recommended Next Priority
 
