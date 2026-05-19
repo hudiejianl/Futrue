@@ -85,12 +85,33 @@ class ForceInferenceService:
         summary = self._build_summary(row, wear_pred, cls_pred)
         rule_hits = evaluate_rules(summary)
         knowledge_items = self.retriever.retrieve(rule_hits, summary=summary)
-        report = generate_report(
-            summary,
-            knowledge_items,
-            mode=report_mode,
-            prompt_template_path=str(self.prompt_template_path),
-        )
+        requested_mode = report_mode
+        used_mode = report_mode
+        backend_error = ""
+        try:
+            report = generate_report(
+                summary,
+                knowledge_items,
+                mode=report_mode,
+                prompt_template_path=str(self.prompt_template_path),
+            )
+        except Exception as e:
+            if report_mode != "template":
+                used_mode = "template"
+                backend_error = repr(e)
+                report = generate_report(
+                    summary,
+                    knowledge_items,
+                    mode="template",
+                    prompt_template_path=str(self.prompt_template_path),
+                )
+            else:
+                raise
+
+        summary["report_backend_requested"] = requested_mode
+        summary["report_backend_used"] = used_mode
+        if backend_error:
+            summary["report_backend_error"] = backend_error
 
         return {
             "summary": summary,

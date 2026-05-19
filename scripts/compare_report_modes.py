@@ -1,4 +1,5 @@
 import argparse
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -75,7 +76,7 @@ def main():
                 "",
                 "### Summary",
                 "```json",
-                str(template_result["summary"]).replace("'", '"'),
+                json.dumps(template_result["summary"], ensure_ascii=False, indent=2),
                 "```",
                 "",
                 "### Template Report",

@@ -52,7 +52,7 @@ def build_demo():
             )
             report_mode = gr.Dropdown(
                 choices=["template", "deepseek", "openai"],
-                value="template",
+                value="deepseek",
                 label="Report Backend",
             )
             run_btn = gr.Button("Run Inference")
