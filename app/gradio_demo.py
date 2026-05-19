@@ -24,12 +24,13 @@ BENCHMARK = json.loads((ROOT / "reports" / "force_onnx_benchmark.json").read_tex
 
 def run_inference(sample_id: str, report_mode: str):
     result = SERVICE.infer(sample_id=sample_id, report_mode=report_mode)
+    status_text = json.dumps(result["status_overview"], ensure_ascii=False, indent=2)
     summary_text = json.dumps(result["summary"], ensure_ascii=False, indent=2)
     rule_text = json.dumps(result["rule_hits"], ensure_ascii=False, indent=2)
     knowledge_text = json.dumps(result["knowledge_items"], ensure_ascii=False, indent=2)
     image_path = result["summary"].get("image_file", "")
     benchmark_text = json.dumps(BENCHMARK, ensure_ascii=False, indent=2)
-    return image_path, summary_text, rule_text, knowledge_text, result["report"], benchmark_text
+    return image_path, status_text, summary_text, rule_text, knowledge_text, result["report"], benchmark_text
 
 
 def build_demo():
@@ -62,7 +63,10 @@ def build_demo():
             report_output = gr.Textbox(label="Diagnostic Report", lines=18)
 
         with gr.Row():
+            status_output = gr.Textbox(label="Prediction vs Ground Truth", lines=10)
             summary_output = gr.Textbox(label="Prediction Summary", lines=14)
+
+        with gr.Row():
             rule_output = gr.Textbox(label="Rule Hits", lines=14)
 
         with gr.Row():
@@ -79,7 +83,7 @@ def build_demo():
         run_btn.click(
             fn=run_inference,
             inputs=[sample_id, report_mode],
-            outputs=[image_view, summary_output, rule_output, knowledge_output, report_output, benchmark_output],
+            outputs=[image_view, status_output, summary_output, rule_output, knowledge_output, report_output, benchmark_output],
         )
 
     return demo

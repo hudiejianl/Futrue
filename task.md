@@ -118,8 +118,8 @@
 
 ## Recommended Next Priority
 
-1. validate the DeepSeek backend end-to-end once the key is available
-2. improve the knowledge base and retrieval quality
-3. polish the demo as the final project showcase
+1. improve the knowledge base and retrieval quality
+2. polish the demo as the final project showcase
+3. refine external-facing presentation materials
 
 At the current stage, explanation quality and demo polish are the highest-value directions.

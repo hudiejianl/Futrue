@@ -113,8 +113,19 @@ class ForceInferenceService:
         if backend_error:
             summary["report_backend_error"] = backend_error
 
+        status_overview = {
+            "sample_id": summary["sample_id"],
+            "cycle_id": summary["cycle_id"],
+            "predicted_wear": round(float(summary["predicted_wear"]), 4),
+            "ground_truth_wear": round(float(summary["ground_truth_wear"]), 4),
+            "predicted_level": int(summary["wear_level"]),
+            "ground_truth_level": int(summary["ground_truth_level"]),
+            "backend_used": summary["report_backend_used"],
+        }
+
         return {
             "summary": summary,
+            "status_overview": status_overview,
             "rule_hits": rule_hits,
             "knowledge_items": knowledge_items,
             "report": report,
