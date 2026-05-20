@@ -120,6 +120,7 @@
 - [x] prepare final external-facing version
 - [x] prepare final resume entry
 - [x] prepare personalized final resume entry
+- [x] prepare final application package
 - [x] prepare Q&A notes
 
 ## Recommended Next Priority
