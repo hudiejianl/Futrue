@@ -396,6 +396,7 @@ Additional presentation materials are now available under `reports/`, including:
 - `final_resume_entry.md`
 - `final_resume_entry_personalized.md`
 - `final_application_package.md`
+- `final_resume_section.md`
 - `qa_notes.md`
 
 At this point, the project is already a strong prototype, and the highest-value work is now system polish and stronger explanation quality, not uncontrolled model expansion.

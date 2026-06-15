@@ -121,6 +121,7 @@
 - [x] prepare final resume entry
 - [x] prepare personalized final resume entry
 - [x] prepare final application package
+- [x] prepare final resume section
 - [x] prepare Q&A notes
 
 ## Recommended Next Priority
